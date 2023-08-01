@@ -55,10 +55,11 @@ interface Logger {
                 message: String,
                 throwable: Throwable?,
             ) {
-                val time = now().toLocalDateTime(timeZone)
+                val time = now().toLocalDateTime(timeZone).time
+                val timeString = time.toString().substring(0, 12)
                 val level = Levels.getFrom(priority)
                 val color = LogColors.getFrom(priority)
-                println("${time.time} ${fixedTag(tag)} $level ${color.call(message)} ${throwable ?: ""}")
+                println("$timeString ${fixedTag(tag)} $level ${color.call(message)} ${throwable ?: ""}")
             }
         }
     }
